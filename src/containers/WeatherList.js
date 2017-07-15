@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 
 
 class WeatherList extends Component {
-  renderWeatherData(cityData, i) {
+  renderWeatherData(cityData) {
     const city = cityData.city.name;
 
     return (
-      <div>
+      <div key={city}>
         <p><b>{city}</b> temperature in 5 days.</p>
-        <table key={i} className="table table-hover">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>{city}</th>
@@ -19,11 +19,11 @@ class WeatherList extends Component {
             </tr>
           </thead>
           <tbody>
-            {cityData.list.map((weather, j) =>
-              <tr key={j}>
-                <td>{ moment.unix(weather.dt).format("YYYY-MM-DD") }</td>
-                <td>{ Math.round(weather.temp.day - 273) } C</td>
-                <td>{ Math.round(weather.temp.max - weather.temp.min) } C</td>
+            {cityData.list.map((data, i) =>
+              <tr key={i}>
+                <td>{ moment.unix(data.dt).format("YYYY-MM-DD") }</td>
+                <td>{ Math.round(data.temp.day - 273) } C</td>
+                <td>{ Math.round(data.temp.max - data.temp.min) } C</td>
               </tr>
             )}
           </tbody>
@@ -33,7 +33,6 @@ class WeatherList extends Component {
   }
 
   render() {
-
     return (
       <div>
         {this.props.weather.map(this.renderWeatherData)}
