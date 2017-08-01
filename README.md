@@ -1,4 +1,4 @@
-# React Weather
+# React Climate App
 A simple weather app build with React
 
 ## API
